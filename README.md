@@ -24,3 +24,7 @@ squeue -A zaneveld
 
 rejoin compute node already allocated:  
 sattach [jobid].0
+
+
+
+From experience - it's a good idea to use os.path.exists() to ensure that the directory to which you want to save your results actually exists, *before* running the actual computation in your script. That way you don't waste *mumble* hundred hours running a command only for the script to fail to save the result when you forgot to add an output directory.
