@@ -57,3 +57,19 @@ To get an interactive session with a compute node:
 
 `salloc -A [account] -p [partition] --mem=[memory] --time=[duration]`
 
+Account and partition depend on your Hyak account. You can see what you have access to by running `hyakalloc`, which will also show how much memory and how many CPUs are available.  
+For duration and memory, start low and increease if you need more. Memory syntax is the amount and units, e.g. `4GB`. Duration can be entered a few different ways; I find "days-hours" to be the easiest (e.g. `0-2` would be zero days and two hours).
+
+Log back into Hyak, and try starting an interactive session with
+
+`salloc -A bbiosci -p compute --mem=4GB --time=0:1`
+
+Notice the text at the beginning of the command line changes. On the login node, it reads `[netid]@klone-login`, while on a compute node it will identify the node, something like `[netid]@n3064`.
+
+There's one more step before we can run what we need. Hyak has some software installed (like wget, nano, and hyakalloc) but more specialized software is left to each group.
+
+To get access to the software we need, we have to activate a container:
+
+`apptainer shell /gscratch/zaneveld/conda/q2-2023.5+3.sif`
+
+The text at the beginning of the line will change again. It should now read `qiime2-2023.5`, demonstrating that you're in that environment, and you can now run whatever programs are installed in that container, using the computing resources of Hyak rather than your own computer.
